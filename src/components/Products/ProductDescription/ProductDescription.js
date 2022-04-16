@@ -35,6 +35,9 @@ class ProductDescription extends Component
         // determine the current main image to be shown
         const currentMainImageElement = Array.from(productImages).find(img => img.key === this.state.currentMainImageSource)
 
+        // determine whether the product is already added to cart or not in order to disable the add to cart button if so
+        const addedToCart = this.props.cartProducts.find(cartProduct => cartProduct.product.id === this.props.id)
+
         return(
             <section className={classes.ProductDescription}>
                 <div className={classes.ProductGallery}>
@@ -52,7 +55,7 @@ class ProductDescription extends Component
                             <h2 className={classes.ProductPrice}>price</h2>
                             <span>{productPrice.currency.symbol} {productPrice.amount}</span>
                         </div>
-                        <Button primary clicked={() => this.props.addToCart(this.props.id)}>add to cart</Button>
+                        <Button primary clicked={() => this.props.addToCart(this.props.id)} disabled={addedToCart}>add to cart</Button>
                         <div className={classes.ProductTextDescription} ref={this.productDescription}>
                         </div>
                     </div>

@@ -3,7 +3,6 @@ import {query,graphQLEndPoint} from "../query"
 import axios from "axios"
 import WithErrorHandler from "../hoc/WithErrorHandler";
 import NavBar from "../components/NavBar/NavBar";
-import classes from "./App.module.css"
 import Products from "../components/Products/Products"
 import ProductDescription from "../components/Products/ProductDescription/ProductDescription";
 import Cart from "../components/Cart/Cart";
@@ -56,14 +55,9 @@ class App extends React.Component
         this.setState({showProductDescription: true,showCart: false, currentProduct: id})
   }
   productAddedToCartHandler = (id) => {
-        // check if the product already exists in the cart or not
-        if (this.state.shoppingCart.find(item => item.product.id === id)){
-            return
-        }
         const product = this.state.data.categories[0].products.find(product => product.id === id)
         this.setState(prevState => {
             return {
-                ...prevState,
                 shoppingCart: [...prevState.shoppingCart,{amount: 1, product: product}]
             }
         })
@@ -75,7 +69,6 @@ class App extends React.Component
 
         this.setState(prevState => {
             return {
-                ...prevState,
                 shoppingCart: prevState.shoppingCart.map(item => {return item.product.id !== id ? item : updatedProduct})
             }
         })
@@ -85,7 +78,6 @@ class App extends React.Component
         if (product.amount === 1){
             this.setState(prevState => {
                 return {
-                    ...prevState,
                     shoppingCart: prevState.shoppingCart.filter(item => item.product.id !== id)
                 }
             })
@@ -96,7 +88,6 @@ class App extends React.Component
 
       this.setState(prevState => {
           return {
-              ...prevState,
               shoppingCart: prevState.shoppingCart.map(item => {return item.product.id !== id ? item : updatedProduct})
           }
       })
@@ -134,7 +125,8 @@ class App extends React.Component
      if (this.state.showProductDescription)
      {
          const product = this.state.data.categories[0].products.find((product) => product.id === this.state.currentProduct)
-         content = <ProductDescription {...product} currency={this.state.currentCurrency} addToCart={this.productAddedToCartHandler}/>
+         content = <ProductDescription {...product} currency={this.state.currentCurrency} cartProducts={this.state.shoppingCart}
+                                       addToCart={this.productAddedToCartHandler}/>
      }
      if (this.state.showCart)
      {
