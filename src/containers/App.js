@@ -127,6 +127,7 @@ class App extends React.Component
         <Products currentCategory={this.state.currentCategory}
                   currentCurrency= {this.state.currentCurrency}
                   products={products}
+                  cartProducts={this.state.shoppingCart}
                   showProductDescription={this.showProductDescriptionHandler}
         />
      )
@@ -144,24 +145,24 @@ class App extends React.Component
      }
      return (
         <WithErrorHandler>
-        <div>
-            <NavBar categories={this.state.data.categories.map(category => category.name)}
-                    changeCategory={this.changeCategoryHandler} currentCategory={this.state.currentCategory}
-                    currencies={currencies} currentCurrency={this.state.currentCurrency}
-                    changeCurrency={this.currencyChangeHandler} cartProducts={this.state.shoppingCart}
-                    toggleCartOverlay={this.cartOverlayHandler}
-            />
-            {
-                this.state.showCartOverlay && <CartOverlay cartProducts={this.state.shoppingCart}
-                                                           hideCartOverlay={this.backDropClickedHandler}
-                                                           currency={this.state.currentCurrency}
-                                                           increaseAmount={this.amountIncreasedHandler}
-                                                           decreaseAmount={this.amountDecreasedHandler}
-                                                           showBag={this.cartHandler}
-                                              />
-            }
-            {content}
-        </div>
+            <div>
+                <NavBar categories={this.state.data.categories.map(category => category.name)}
+                        changeCategory={this.changeCategoryHandler} currentCategory={this.state.currentCategory}
+                        currencies={currencies} currentCurrency={this.state.currentCurrency}
+                        changeCurrency={this.currencyChangeHandler} cartProducts={this.state.shoppingCart}
+                        toggleCartOverlay={this.cartOverlayHandler}
+                />
+                {
+                    this.state.showCartOverlay && <CartOverlay cartProducts={this.state.shoppingCart}
+                                                               hideCartOverlay={this.backDropClickedHandler}
+                                                               currency={this.state.currentCurrency}
+                                                               increaseAmount={this.amountIncreasedHandler}
+                                                               decreaseAmount={this.amountDecreasedHandler}
+                                                               showBag={this.cartHandler}
+                                                  />
+                }
+                {content}
+            </div>
         </WithErrorHandler>
     );
   }
