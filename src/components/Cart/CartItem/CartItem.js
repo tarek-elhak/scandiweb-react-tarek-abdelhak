@@ -1,4 +1,5 @@
 import {Component} from "react";
+import PropTypes from "prop-types"
 import classes from "./CartItem.module.css"
 import CartItemControls from "./CartItemControls/CartItemControls";
 import ProductAttributes from "../../Products/ProductDescription/ProductAttributes/ProductAttributes";
@@ -28,5 +29,11 @@ class CartItem extends Component
         )
     }
 }
+
+CartItem.propTypes = {
+    product: PropTypes.object.isRequired,
+    amount: PropTypes.number.isRequired
+}
+
 
 export default CartItem
