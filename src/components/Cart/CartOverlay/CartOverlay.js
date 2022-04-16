@@ -29,15 +29,20 @@ class CartOverlay extends Component
         return (
             <>
                 <div className={classes.CartOverlay}>
-                    <h3 className={classes.Header}><span>my bag,</span> {this.props.cartProducts.length} items</h3>
-                    {cartItems}
-                    <div className={classes.TotalPrice}>
-                        <p>total</p>
-                        <p>{this.props.currency.symbol}{totalPrice.toFixed(2)}</p>
+                    <div>
+                        <h3 className={classes.Header}><span>my bag,</span> {this.props.cartProducts.length} items</h3>
+                        {cartItems}
+                        {
+                            this.props.cartProducts.length !== 0 &&
+                            <div className={classes.TotalPrice}>
+                                <p>total</p>
+                                <p>{this.props.currency.symbol}{totalPrice.toFixed(2)}</p>
+                            </div>
+                        }
                     </div>
                     <div className={classes.CartOverlayButtons}>
                         <Button class="CartOverlay" clicked={this.props.showBag}> view bag </Button>
-                        <Button primary class="CartOverlay"> check out </Button>
+                        <Button primary class="CartOverlay" disabled={this.props.cartProducts.length === 0}> check out </Button>
                     </div>
                 </div>
                 <BackDrop clicked={this.props.hideCartOverlay}/>

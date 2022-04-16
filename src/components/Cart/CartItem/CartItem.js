@@ -9,7 +9,8 @@ class CartItem extends Component
     render() {
         // get the price object based on the current selected currency
         const productPrice = this.props.product.prices.find(price => price.currency.label === this.props.currency.label)
-        const classNames = [classes.CartItem,classes[this.props.className || ""]]
+        const classNames =
+            [classes.CartItem,classes[this.props.className || ""],this.props.noBorderBottom ? classes.NoBorderBottom: ""]
         return(
             <div className={classNames.join(" ")}>
                 <div>

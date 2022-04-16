@@ -5,6 +5,10 @@
     padding-block: 2rem;
     border-bottom: 1px solid #E5E5E5;
 }
+.NoBorderBottom
+{
+    border-bottom: 0;
+}
 .CartItem.CartOverlay
 {
     width: 293px;

@@ -7,7 +7,7 @@
     box-shadow: 0 4px 35px rgba(168, 172, 176, 0.19);
     position: absolute;
     top: 4rem;
-    z-index: 100;
+    z-index: 20;
 }
 .Currencies li
 {

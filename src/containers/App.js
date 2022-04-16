@@ -144,7 +144,7 @@ class App extends React.Component
      }
      return (
         <WithErrorHandler>
-        <div className={classes["App"]}>
+        <div>
             <NavBar categories={this.state.data.categories.map(category => category.name)}
                     changeCategory={this.changeCategoryHandler} currentCategory={this.state.currentCategory}
                     currencies={currencies} currentCurrency={this.state.currentCurrency}
