@@ -1,7 +1,6 @@
 import React from "react"
 import {query,graphQLEndPoint} from "../query"
 import axios from "axios"
-import {data} from "../data"
 import WithErrorHandler from "../hoc/WithErrorHandler";
 import NavBar from "../components/NavBar/NavBar";
 import classes from "./App.module.css"
@@ -14,8 +13,7 @@ class App extends React.Component
     constructor(props) {
         super(props);
         this.state = {
-            // data: {categories: []},
-            data: data,
+            data: {categories: []},
             currentCategory: "all",
             currentCurrency: {
                 symbol: "$",
@@ -30,16 +28,16 @@ class App extends React.Component
 
   componentDidMount()
   {
-      // const fetchData = async () => {
-      //     const queryResult = await axios.post(
-      //         graphQLEndPoint,{
-      //             query: query
-      //         }
-      //     );
-      //     const result = queryResult.data.data.categories
-      //     this.setState({data: {categories: result}})
-      // }
-      // fetchData()
+      const fetchData = async () => {
+          const queryResult = await axios.post(
+              graphQLEndPoint,{
+                  query: query
+              }
+          );
+          const result = queryResult.data.data.categories
+          this.setState({data: {categories: result}})
+      }
+      fetchData()
   }
   changeCategoryHandler = (name) => {
         this.setState({currentCategory: name, showProductDescription: false, showCart: false})
