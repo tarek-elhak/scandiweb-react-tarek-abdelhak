@@ -7,6 +7,7 @@ import classes from "./App.module.css"
 import Products from "../components/Products/Products"
 import ProductDescription from "../components/Products/ProductDescription/ProductDescription";
 import Cart from "../components/Cart/Cart";
+import CartOverlay from "../components/Cart/CartOverlay/CartOverlay";
 
 class App extends React.Component
 {
@@ -22,7 +23,8 @@ class App extends React.Component
             showProductDescription: false,
             currentProduct: null,
             showCart: false,
-            shoppingCart: []
+            shoppingCart: [],
+            showCartOverlay: false
         }
     }
 
@@ -99,8 +101,14 @@ class App extends React.Component
           }
       })
   }
-  cartShownHandler = () => {
-        this.setState({showCart: true,showProductDescription: false})
+  cartHandler = () => {
+        this.setState({showCart: true,showProductDescription: false, showCartOverlay: false})
+  }
+  cartOverlayHandler = () => {
+        this.setState(prevState => ({showCartOverlay: !prevState.showCartOverlay}))
+  }
+  backDropClickedHandler = () => {
+        this.setState({showCartOverlay: false})
   }
   render() {
       // filter products based on the currentCategory
@@ -141,8 +149,17 @@ class App extends React.Component
                     changeCategory={this.changeCategoryHandler} currentCategory={this.state.currentCategory}
                     currencies={currencies} currentCurrency={this.state.currentCurrency}
                     changeCurrency={this.currencyChangeHandler} cartProducts={this.state.shoppingCart}
-                    showBag={this.cartShownHandler}
+                    toggleCartOverlay={this.cartOverlayHandler}
             />
+            {
+                this.state.showCartOverlay && <CartOverlay cartProducts={this.state.shoppingCart}
+                                                           hideCartOverlay={this.backDropClickedHandler}
+                                                           currency={this.state.currentCurrency}
+                                                           increaseAmount={this.amountIncreasedHandler}
+                                                           decreaseAmount={this.amountDecreasedHandler}
+                                                           showBag={this.cartHandler}
+                                              />
+            }
             {content}
         </div>
         </WithErrorHandler>

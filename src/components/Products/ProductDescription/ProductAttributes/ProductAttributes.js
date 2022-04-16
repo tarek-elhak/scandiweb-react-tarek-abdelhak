@@ -4,9 +4,10 @@ import classes from "./ProductAttributes.module.css"
 class ProductAttributes extends Component
 {
     render() {
-        const attributesElements = this.props.attributes.map(attribute => <ProductAttribute key={attribute.id} {...attribute}/>)
+        const attributesElements = this.props.attributes.map(attribute => <ProductAttribute key={attribute.id} {...attribute} class={this.props.class}/>)
+        const classNames = [classes.ProductAttributes,classes[this.props.class || ""]]
         return (
-            <div className={classes.ProductAttributes}>
+            <div className={classNames.join(" ")}>
                 {attributesElements}
             </div>
         );

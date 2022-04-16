@@ -42,7 +42,7 @@ class NavBar extends React.Component
                         </button>
                     </li>
                     <li className={classes.ShoppingCart}>
-                        <button onClick={this.props.showBag}>
+                        <button onClick={this.props.toggleCartOverlay}>
                             <img src={cart} alt="shopping cart"/>
                         </button>
                         {this.props.cartProducts.length !== 0 && <div className={classes.CartProductsNotification}> {this.props.cartProducts.length} </div>}

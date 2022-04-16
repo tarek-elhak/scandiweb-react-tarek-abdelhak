@@ -5,21 +5,40 @@
     padding-block: 2rem;
     border-bottom: 1px solid #E5E5E5;
 }
-.ProductName
+.CartItem.CartOverlay
+{
+    width: 293px;
+    height: 137px;
+    padding-block: 0;
+    margin-inline: 16px;
+    margin-bottom: 40px;
+    border: 0;
+}
+.ProductName,.ProductBrand
 {
     font-size: 3rem;
-    font-weight: 600;
     line-height: 27px;
     color: #1D1F22;
+}
+.ProductName
+{
+    font-weight: 600;
     margin-bottom: 1.6rem;
 }
 .ProductBrand
 {
-    font-size: 3rem;
     font-weight: 400;
-    line-height: 27px;
-    color: #1D1F22;
     margin-bottom: 1.2rem;
+}
+.CartItem.CartOverlay .ProductName,.CartItem.CartOverlay .ProductBrand
+{
+    font-size: 1.6rem;
+    font-weight: 300;
+    margin-bottom: 0;
+}
+.CartItem.CartOverlay .ProductBrand
+{
+    margin-bottom: 0.5rem;
 }
 .ProductPrice
 {
@@ -32,6 +51,15 @@
     line-height: 18px;
     margin-bottom: 1.2rem;
 }
+.CartItem.CartOverlay .ProductPrice
+{
+    width: 5.2rem;
+    height: 2.6rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 26px;
+    margin-bottom: 2.7rem;
+}
 .CartControls
 {
     display: flex;
@@ -43,6 +71,12 @@
     font-weight: 500;
     line-height: 38px;
     text-align: center;
+    color: #1D1F22;
+}
+.CartItem.CartOverlay .ItemAmount
+{
+    font-size: 1.6rem;
+    line-height: 26px;
 }
 .ProductImage
 {
@@ -50,4 +84,11 @@
     height: 18.5rem;
     object-fit: contain;
     margin-left: 1.2rem;
+}
+
+.CartItem.CartOverlay .ProductImage
+{
+    width: 10rem;
+    height: 13.7rem;
+    margin-left: 1.6rem;
 }
