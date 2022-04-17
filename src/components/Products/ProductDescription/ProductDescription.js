@@ -37,7 +37,8 @@ class ProductDescription extends Component
 
         // determine whether the product is already added to cart or not in order to disable the add to cart button if so
         const addedToCart = this.props.cartProducts.find(cartProduct => cartProduct.product.id === this.props.id)
-
+        // determine whether any attribute is selected or not, to make the button disabled in case on not selecting any product attribute
+        const attributesSelected = this.props.attributes.every(attribute => attribute.value !== "")
         return(
             <section className={classes.ProductDescription}>
                 <div className={classes.ProductGallery}>
@@ -50,12 +51,12 @@ class ProductDescription extends Component
                     <div className={classes.ProductDetails}>
                         <h2 className={classes.ProductName}>{this.props.name}</h2>
                         <p className={classes.ProductBrand}>{this.props.brand}</p>
-                        <ProductAttributes attributes={this.props.attributes}/>
+                        <ProductAttributes attributes={this.props.attributes} changeAttribute={this.props.changeAttribute}/>
                         <div>
                             <h2 className={classes.ProductPrice}>price</h2>
                             <span>{productPrice.currency.symbol} {productPrice.amount}</span>
                         </div>
-                        <Button primary clicked={() => this.props.addToCart(this.props.id)} disabled={addedToCart}>add to cart</Button>
+                        <Button primary clicked={this.props.addToCart} disabled={addedToCart || !attributesSelected}>add to cart</Button>
                         <div className={classes.ProductTextDescription} ref={this.productDescription}>
                         </div>
                     </div>

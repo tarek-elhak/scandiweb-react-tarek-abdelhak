@@ -8,6 +8,8 @@ class Cart extends Component
                                                                         increaseAmount={() => this.props.increaseAmount(item.product.id)}
                                                                         decreaseAmount={() => this.props.decreaseAmount(item.product.id)}
                                                                         noBorderBottom={this.props.cartProducts.length - index === 1}
+                                                                        productId={item.product.id}
+                                                                        changeAttribute={this.props.changeAttribute}
                                                                         {...item}/>)
         return(
             <section className={classes.Cart}>

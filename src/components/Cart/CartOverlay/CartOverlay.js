@@ -12,6 +12,7 @@ class CartOverlay extends Component
                                                                         increaseAmount={() => this.props.increaseAmount(item.product.id)}
                                                                         decreaseAmount={() => this.props.decreaseAmount(item.product.id)}
                                                                         className="CartOverlay"
+                                                                        changeAttribute={this.props.changeAttribute}
                                                                         {...item}/>)
         /*
             start calculating the total price based on

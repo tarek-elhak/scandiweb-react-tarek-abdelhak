@@ -7,6 +7,7 @@ import Products from "../components/Products/Products"
 import ProductDescription from "../components/Products/ProductDescription/ProductDescription";
 import Cart from "../components/Cart/Cart";
 import CartOverlay from "../components/Cart/CartOverlay/CartOverlay";
+import cart from "../components/Cart/Cart";
 
 class App extends React.Component
 {
@@ -52,15 +53,83 @@ class App extends React.Component
   }
 
   showProductDescriptionHandler = (id) => {
-        this.setState({showProductDescription: true,showCart: false, currentProduct: id})
+        /*
+            get the product from the shopping cart first if it exists to show its last status
+            else, get it from the products
+        */
+        let currentProduct
+        const cartProduct = this.state.shoppingCart.find(cartProduct => cartProduct.product.id === id)
+        if (cartProduct){
+            currentProduct = cartProduct.product
+        }else{
+            currentProduct = this.state.data.categories[0].products.find((product) => product.id === id)
+            // add value prop to each product attribute to be used later to determine which attribute is selected
+            currentProduct.attributes.forEach(attribute => attribute.value = "")
+        }
+
+      this.setState({showProductDescription: true,showCart: false, currentProduct: currentProduct})
+
+
   }
-  productAddedToCartHandler = (id) => {
-        const product = this.state.data.categories[0].products.find(product => product.id === id)
+  productAddedToCartHandler = () => {
+        // /*
+        //      check if the product is already exist in the cart or not, if so, don't add it again
+        //      else, add it
+        //  */
+        // const product = this.state.currentProduct
+        // if (this.state.shoppingCart.find(cartProduct => cartProduct.product.id === this.state.currentProduct.id))
+        // {
+        //     return
+        // }
+
         this.setState(prevState => {
             return {
-                shoppingCart: [...prevState.shoppingCart,{amount: 1, product: product}]
+                shoppingCart: [...prevState.shoppingCart,{amount: 1, product: this.state.currentProduct}]
             }
         })
+  }
+  attributeChangedHandler = (e) => {
+        const updatedCurrentProduct = {...this.state.currentProduct}
+        const updatedAttributes = updatedCurrentProduct.attributes.map(attribute => {
+            if (attribute.name === e.target.name){
+                let updatedAttribute = {...attribute}
+                updatedAttribute.value = e.target.value
+                return updatedAttribute
+            }else{
+                return attribute
+            }
+        })
+      this.setState(prevState => {
+          return {
+              currentProduct: {...prevState.currentProduct,attributes: updatedAttributes}
+          }
+      })
+  }
+  componentDidUpdate(prevProps, prevState, snapshot)
+  {
+      // if (prevState.currentProduct) {
+      //     // check if the current product is in the shopping cart or not, if so, it should be synced with any attribute changes in the current product
+      //     if (this.state.shoppingCart.length !== 0){
+      //         const product = this.state.shoppingCart.find(cartProduct => cartProduct.product.id === prevState.currentProduct.id)
+      //         if (product){
+      //             // determine whether any attribute value is changed in the currentProduct or not
+      //             const attribute = prevState.currentProduct.attributes.find((attribute,index) => {
+      //                 return attribute.value !== product.product.attributes[index].value
+      //             })
+      //             if (attribute)
+      //             {
+      //                 let updatedAttributes = product.product.attributes.map(attr => attr.id === attribute.id ? attribute : attr)
+      //                 let updatedProduct = {...product, attributes: updatedAttributes}
+      //                 this.setState(prevState => {
+      //                     return {
+      //                         shoppingCart: prevState.shoppingCart.map(cartProduct => cartProduct.product.id === updatedProduct.product.id ? updatedProduct : cartProduct)
+      //                     }
+      //                 })
+      //             }
+      //         }
+      //     }
+      //
+      // }
   }
   amountIncreasedHandler = (id) => {
         const product = this.state.shoppingCart.find(item => item.product.id === id)
@@ -124,15 +193,16 @@ class App extends React.Component
      )
      if (this.state.showProductDescription)
      {
-         const product = this.state.data.categories[0].products.find((product) => product.id === this.state.currentProduct)
-         content = <ProductDescription {...product} currency={this.state.currentCurrency} cartProducts={this.state.shoppingCart}
-                                       addToCart={this.productAddedToCartHandler}/>
+
+         content = <ProductDescription {...this.state.currentProduct} currency={this.state.currentCurrency} cartProducts={this.state.shoppingCart}
+                                       addToCart={this.productAddedToCartHandler} changeAttribute={this.attributeChangedHandler}/>
      }
      if (this.state.showCart)
      {
          content = <Cart cartProducts={this.state.shoppingCart} currency={this.state.currentCurrency}
                          increaseAmount={this.amountIncreasedHandler}
                          decreaseAmount={this.amountDecreasedHandler}
+                         changeAttribute={this.attributeChangedHandler}
                    />
      }
      return (
@@ -151,6 +221,7 @@ class App extends React.Component
                                                                increaseAmount={this.amountIncreasedHandler}
                                                                decreaseAmount={this.amountDecreasedHandler}
                                                                showBag={this.cartHandler}
+                                                               changeAttribute={this.attributeChangedHandler}
                                                   />
                 }
                 {content}
