@@ -6,7 +6,7 @@ class ProductAttributeItem extends Component
 
     render() {
         let attributeChangedHandler
-        if (this.props.inProductDescription)
+        if (this.props.inProductDescription && this.props.noCartOverlay)
         {
             attributeChangedHandler = this.props.changeAttribute
         }else {

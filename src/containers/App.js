@@ -192,6 +192,7 @@ class App extends React.Component
          content = <ProductDescription {...this.state.currentProduct} currency={this.state.currentCurrency} cartProducts={this.state.shoppingCart}
                                        addToCart={this.productAddedToCartHandler} changeAttribute={this.attributeChangedHandler}
                                        inProductDescription={this.state.showProductDescription}
+                                       noCartOverlay={this.state.showCartOverlay}
                                        contentName="productDescription"
                    />
      }

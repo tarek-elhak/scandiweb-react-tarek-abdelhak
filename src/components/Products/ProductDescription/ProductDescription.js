@@ -55,6 +55,7 @@ class ProductDescription extends Component
                             attributes={this.props.attributes} changeAttribute={this.props.changeAttribute}
                             inProductDescription={this.props.inProductDescription} productId={this.props.id}
                             contentName={this.props.contentName}
+                            noCartOverlay={this.props.noCartOverlay}
                         />
                         <div>
                             <h2 className={classes.ProductPrice}>price</h2>

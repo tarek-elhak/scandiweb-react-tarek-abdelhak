@@ -12,6 +12,7 @@ class ProductAttribute extends Component
                                                                         inProductDescription={this.props.inProductDescription}
                                                                         productId={this.props.productId}
                                                                         contentName={this.props.contentName}
+                                                                        noCartOverlay={this.props.noCartOverlay}
                                                                         class={this.props.class} />)
         const classNames = [classes.ProductAttribute,classes[this.props.class || ""]]
         return (
