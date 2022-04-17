@@ -17,7 +17,14 @@ class CartItem extends Component
                     <h2 className={classes.ProductName}>{this.props.product.name}</h2>
                     <p className={classes.ProductBrand}>{this.props.product.brand}</p>
                     <p className={classes.ProductPrice}>{productPrice.currency.symbol}{productPrice.amount}</p>
-                    <ProductAttributes attributes={this.props.product.attributes} class={this.props.className} changeAttribute={this.props.changeAttribute}/>
+                    <ProductAttributes
+                        attributes={this.props.product.attributes}
+                        class={this.props.className}
+                        changeAttribute={this.props.changeAttribute}
+                        inProductDescription={this.props.inProductDescription}
+                        productId={this.props.productId}
+                        contentName={this.props.contentName}
+                    />
                 </div>
                 <div className={classes.CartControls}>
                     <div>

@@ -72,16 +72,6 @@ class App extends React.Component
 
   }
   productAddedToCartHandler = () => {
-        // /*
-        //      check if the product is already exist in the cart or not, if so, don't add it again
-        //      else, add it
-        //  */
-        // const product = this.state.currentProduct
-        // if (this.state.shoppingCart.find(cartProduct => cartProduct.product.id === this.state.currentProduct.id))
-        // {
-        //     return
-        // }
-
         this.setState(prevState => {
             return {
                 shoppingCart: [...prevState.shoppingCart,{amount: 1, product: this.state.currentProduct}]
@@ -89,48 +79,53 @@ class App extends React.Component
         })
   }
   attributeChangedHandler = (e) => {
-        const updatedCurrentProduct = {...this.state.currentProduct}
-        const updatedAttributes = updatedCurrentProduct.attributes.map(attribute => {
-            if (attribute.name === e.target.name){
-                let updatedAttribute = {...attribute}
-                updatedAttribute.value = e.target.value
-                return updatedAttribute
-            }else{
-                return attribute
+      /* check if the current product exist in the shopping cart, then its attributes should be changed from the cart || cart overlay
+        and not from the product description
+       */
+      const product = this.state.shoppingCart.find(cartProduct => cartProduct.product.id === this.state.currentProduct.id)
+      if (!product) {
+            const updatedCurrentProduct = {...this.state.currentProduct}
+            const attributeName = e.target.name.split("|")[2]
+            const updatedAttributes = updatedCurrentProduct.attributes.map(attribute => {
+                if (attribute.name === attributeName){
+                    let updatedAttribute = {...attribute}
+                    updatedAttribute.value = e.target.value
+                    return updatedAttribute
+                }else{
+                    return attribute
+                }
+            })
+          this.setState(prevState => {
+              return {
+                  currentProduct: {...prevState.currentProduct,attributes: updatedAttributes}
+              }
+          })
+      }
+
+  }
+  cartProductAttributeChangedHandler = (e,id) => {
+        const attributeName = e.target.name.split("|")[2]
+        this.setState(prevState => {
+            return {
+                shoppingCart: prevState.shoppingCart.map(cartProduct => {
+                    if (cartProduct.product.id === id){
+                        cartProduct.product.attributes.map(attribute => {
+                            if (attribute.name === attributeName){
+                                attribute.value = e.target.value
+                                return attribute
+                            }else{
+                                return attribute
+                            }
+                        })
+                        return cartProduct
+                    }else{
+                        return cartProduct
+                    }
+                })
             }
         })
-      this.setState(prevState => {
-          return {
-              currentProduct: {...prevState.currentProduct,attributes: updatedAttributes}
-          }
-      })
   }
-  componentDidUpdate(prevProps, prevState, snapshot)
-  {
-      // if (prevState.currentProduct) {
-      //     // check if the current product is in the shopping cart or not, if so, it should be synced with any attribute changes in the current product
-      //     if (this.state.shoppingCart.length !== 0){
-      //         const product = this.state.shoppingCart.find(cartProduct => cartProduct.product.id === prevState.currentProduct.id)
-      //         if (product){
-      //             // determine whether any attribute value is changed in the currentProduct or not
-      //             const attribute = prevState.currentProduct.attributes.find((attribute,index) => {
-      //                 return attribute.value !== product.product.attributes[index].value
-      //             })
-      //             if (attribute)
-      //             {
-      //                 let updatedAttributes = product.product.attributes.map(attr => attr.id === attribute.id ? attribute : attr)
-      //                 let updatedProduct = {...product, attributes: updatedAttributes}
-      //                 this.setState(prevState => {
-      //                     return {
-      //                         shoppingCart: prevState.shoppingCart.map(cartProduct => cartProduct.product.id === updatedProduct.product.id ? updatedProduct : cartProduct)
-      //                     }
-      //                 })
-      //             }
-      //         }
-      //     }
-      //
-      // }
-  }
+
   amountIncreasedHandler = (id) => {
         const product = this.state.shoppingCart.find(item => item.product.id === id)
         const updatedProduct = {...product}
@@ -195,15 +190,20 @@ class App extends React.Component
      {
 
          content = <ProductDescription {...this.state.currentProduct} currency={this.state.currentCurrency} cartProducts={this.state.shoppingCart}
-                                       addToCart={this.productAddedToCartHandler} changeAttribute={this.attributeChangedHandler}/>
+                                       addToCart={this.productAddedToCartHandler} changeAttribute={this.attributeChangedHandler}
+                                       inProductDescription={this.state.showProductDescription}
+                                       contentName="productDescription"
+                   />
      }
      if (this.state.showCart)
      {
          content = <Cart cartProducts={this.state.shoppingCart} currency={this.state.currentCurrency}
                          increaseAmount={this.amountIncreasedHandler}
                          decreaseAmount={this.amountDecreasedHandler}
-                         changeAttribute={this.attributeChangedHandler}
-                   />
+                         changeAttribute={this.cartProductAttributeChangedHandler}
+                         inProductDescription={this.state.showProductDescription}
+                         contentName="cart"
+         />
      }
      return (
         <WithErrorHandler>
@@ -221,7 +221,9 @@ class App extends React.Component
                                                                increaseAmount={this.amountIncreasedHandler}
                                                                decreaseAmount={this.amountDecreasedHandler}
                                                                showBag={this.cartHandler}
-                                                               changeAttribute={this.attributeChangedHandler}
+                                                               inProductDescription={this.state.showProductDescription}
+                                                               contentName="cartOverlay"
+                                                               changeAttribute={this.cartProductAttributeChangedHandler}
                                                   />
                 }
                 {content}

@@ -51,7 +51,11 @@ class ProductDescription extends Component
                     <div className={classes.ProductDetails}>
                         <h2 className={classes.ProductName}>{this.props.name}</h2>
                         <p className={classes.ProductBrand}>{this.props.brand}</p>
-                        <ProductAttributes attributes={this.props.attributes} changeAttribute={this.props.changeAttribute}/>
+                        <ProductAttributes
+                            attributes={this.props.attributes} changeAttribute={this.props.changeAttribute}
+                            inProductDescription={this.props.inProductDescription} productId={this.props.id}
+                            contentName={this.props.contentName}
+                        />
                         <div>
                             <h2 className={classes.ProductPrice}>price</h2>
                             <span>{productPrice.currency.symbol} {productPrice.amount}</span>

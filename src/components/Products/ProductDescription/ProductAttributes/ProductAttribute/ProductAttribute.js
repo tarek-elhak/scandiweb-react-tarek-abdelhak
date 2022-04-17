@@ -9,6 +9,9 @@ class ProductAttribute extends Component
                                                                         key={item.id} attributeValue={this.props.value}
                                                                         attributeName={this.props.name} {...item}
                                                                         changeAttribute={this.props.changeAttribute}
+                                                                        inProductDescription={this.props.inProductDescription}
+                                                                        productId={this.props.productId}
+                                                                        contentName={this.props.contentName}
                                                                         class={this.props.class} />)
         const classNames = [classes.ProductAttribute,classes[this.props.class || ""]]
         return (

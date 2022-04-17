@@ -9,6 +9,7 @@ class Cart extends Component
                                                                         decreaseAmount={() => this.props.decreaseAmount(item.product.id)}
                                                                         noBorderBottom={this.props.cartProducts.length - index === 1}
                                                                         productId={item.product.id}
+                                                                        contentName={this.props.contentName}
                                                                         changeAttribute={this.props.changeAttribute}
                                                                         {...item}/>)
         return(
