@@ -7,7 +7,6 @@ import Products from "../components/Products/Products"
 import ProductDescription from "../components/Products/ProductDescription/ProductDescription";
 import Cart from "../components/Cart/Cart";
 import CartOverlay from "../components/Cart/CartOverlay/CartOverlay";
-import cart from "../components/Cart/Cart";
 
 class App extends React.Component
 {
@@ -24,7 +23,8 @@ class App extends React.Component
             currentProduct: null,
             showCart: false,
             shoppingCart: [],
-            showCartOverlay: false
+            showCartOverlay: false,
+            currentPage: 1
         }
     }
 
@@ -165,6 +165,9 @@ class App extends React.Component
   backDropClickedHandler = () => {
         this.setState({showCartOverlay: false})
   }
+  currentPageChangedHandler = (pageNumber) => {
+        this.setState({currentPage: pageNumber})
+  }
   render() {
       // filter products based on the currentCategory
       let products = []
@@ -173,6 +176,14 @@ class App extends React.Component
               products = category.products;
           }
       })
+      /*
+        get slice from the products based on the current page
+      */
+      const numberOfProducts = products.length
+      const productsPerPage = 6
+      const indexOfLastProduct = this.state.currentPage * productsPerPage
+      const indexOfFirstProduct = indexOfLastProduct - productsPerPage
+      products = products.slice(indexOfFirstProduct,indexOfLastProduct)
       // get all currencies to be passed to the navbar
       let currencies = this.state.data.categories.length !== 0 && this.state.data.categories[0].products[0]
                        .prices.map(price => price.currency)
@@ -184,6 +195,10 @@ class App extends React.Component
                   products={products}
                   cartProducts={this.state.shoppingCart}
                   showProductDescription={this.showProductDescriptionHandler}
+                  productsPerPage={productsPerPage}
+                  productsCount= {numberOfProducts}
+                  currentPage={this.state.currentPage}
+                  changeCurrentPage={this.currentPageChangedHandler}
         />
      )
      if (this.state.showProductDescription)

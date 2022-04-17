@@ -19,3 +19,31 @@
     grid-template-columns: repeat(3,1fr);
     gap: 10rem 4rem;
 }
+
+.Paginate
+{
+    margin: 10rem auto 0;
+    width: fit-content;
+}
+.Pages
+{
+    display: flex;
+    align-items: center;
+    gap: 1.8rem;
+    font-size: 2rem;
+}
+.Pages li
+{
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.Pages li.PageActive
+{
+    background-color: #5ECE7B;
+    color: #FFF;
+}
