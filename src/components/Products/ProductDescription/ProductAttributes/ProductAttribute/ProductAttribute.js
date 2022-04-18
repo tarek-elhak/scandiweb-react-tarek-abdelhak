@@ -8,6 +8,7 @@ class ProductAttribute extends Component
         const items = this.props.items.map(item => <ProductAttributeItem
                                                                         key={item.id} attributeValue={this.props.value}
                                                                         attributeName={this.props.name} {...item}
+                                                                        type={this.props.type}
                                                                         changeAttribute={this.props.changeAttribute}
                                                                         inProductDescription={this.props.inProductDescription}
                                                                         productId={this.props.productId}

@@ -6,6 +6,7 @@ class ProductAttributes extends Component
     render() {
         const attributesElements = this.props.attributes.map(attribute => <ProductAttribute
                                                                                             key={attribute.id}
+                                                                                            type={attribute.type}
                                                                                             changeAttribute={this.props.changeAttribute}
                                                                                             class={this.props.class}
                                                                                             inProductDescription={this.props.inProductDescription}
