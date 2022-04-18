@@ -7,6 +7,7 @@ import Products from "../components/Products/Products"
 import ProductDescription from "../components/Products/ProductDescription/ProductDescription";
 import Cart from "../components/Cart/Cart";
 import CartOverlay from "../components/Cart/CartOverlay/CartOverlay";
+import classes from "./App.module.css"
 
 class App extends React.Component
 {
@@ -223,7 +224,7 @@ class App extends React.Component
      }
      return (
         <WithErrorHandler>
-            <div>
+            <div className={classes.App}>
                 <NavBar categories={this.state.data.categories.map(category => category.name)}
                         changeCategory={this.changeCategoryHandler} currentCategory={this.state.currentCategory}
                         currencies={currencies} currentCurrency={this.state.currentCurrency}
