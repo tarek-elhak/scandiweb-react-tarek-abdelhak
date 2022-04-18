@@ -13,7 +13,7 @@ class CartItem extends Component
             [classes.CartItem,classes[this.props.className || ""],this.props.noBorderBottom ? classes.NoBorderBottom: ""]
         return(
             <div className={classNames.join(" ")}>
-                <div>
+                <div className={classes.ProductAttributes}>
                     <h2 className={classes.ProductName}>{this.props.product.name}</h2>
                     <p className={classes.ProductBrand}>{this.props.product.brand}</p>
                     <p className={classes.ProductPrice}>{productPrice.currency.symbol}{productPrice.amount}</p>

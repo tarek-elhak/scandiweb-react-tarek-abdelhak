@@ -46,3 +46,7 @@ input:checked + label.Swatch
 {
     box-shadow: 1px 2px 4px 1px rgba(20,20,20,0.6);
 }
+input:not(:checked) + label.Swatch
+{
+    opacity: 0.2;
+}
