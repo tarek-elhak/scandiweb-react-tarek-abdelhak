@@ -23,7 +23,9 @@ input
 .ProductAttributeItem.CartOverlay
 {
     width: 2.8rem;
+    min-width: fit-content;
     height: 2.4rem;
+    min-height: fit-content;
     font-size: 1.4rem;
     line-height: 22px;
     text-align: center;
