@@ -39,3 +39,10 @@ button:disabled
     cursor: not-allowed;
     background-color: #CCC;
 }
+@media (max-width: 538px)
+{
+    .Primary.CartOverlay,.Secondary.CartOverlay
+    {
+        padding: 1rem 2rem;
+    }
+}

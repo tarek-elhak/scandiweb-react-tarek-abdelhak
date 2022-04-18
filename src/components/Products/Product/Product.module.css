@@ -79,3 +79,26 @@
     font-weight: 500;
     line-height: 29px;
 }
+@media (max-width: 792px) {
+    .ProductCard
+    {
+        width: 600px;
+        margin: auto;
+    }
+    .ProductImage
+    {
+        width: 90%;
+    }
+}
+@media (max-width: 472px)
+{
+    .ProductCard
+    {
+        width: 350px;
+        margin: auto;
+    }
+    .ProductImage
+    {
+        width: 100%;
+    }
+}

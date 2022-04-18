@@ -16,3 +16,12 @@
     height: 2.4rem;
     font-size: 1.6rem;
 }
+
+@media (max-width: 538px)
+{
+    .Control.CartOverlay
+    {
+        margin: 1rem;
+        align-items: start;
+    }
+}

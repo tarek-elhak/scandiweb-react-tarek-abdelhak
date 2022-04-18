@@ -12,9 +12,19 @@
     padding-bottom: 6rem;
     border-bottom: 1px solid #E5E5E5;
 }
-.CartSeparator
+
+/*
+    media queries
+*/
+
+@media (max-width: 980px)
 {
-    color: #E5E5E5;
-    height: 1px;
-    width: 100%;
+    .Cart
+    {
+        padding-inline:0 ;
+    }
+    .CartHeader
+    {
+        padding-left: 10rem;
+    }
 }

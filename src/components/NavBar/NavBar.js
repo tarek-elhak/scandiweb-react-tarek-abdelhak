@@ -6,6 +6,7 @@ import arrowUp from "../../assets/images/arrow-up.png"
 import CurrencySwitcher from "./CurrencySwitcher/CurrencySwitcher";
 
 
+
 class NavBar extends React.Component
 {
     state = {
@@ -29,11 +30,12 @@ class NavBar extends React.Component
                    </li>
         })
         return (
-            <nav className={classes["nav--bar"]}>
-                <ul className={classes["categories"]}>
+
+            <nav className={classes.NavBar}>
+                <ul className={classes.Categories}>
                     {categoryListItems}
                 </ul>
-                <img src={logo} alt="scandiweb store front" className={classes["logo"]}/>
+                <img src={logo} alt="scandiweb store front" className={classes.Logo}/>
                 <ul className={classes.Others}>
                     <li className={classes.Currency}>
                         <button onClick={this.toggleCurrencySwitcher}>

@@ -61,3 +61,21 @@
     margin: auto 2rem 2rem 1.3rem;
     align-items: center;
 }
+
+/*
+    media queries
+*/
+@media (max-width: 768px)
+{
+    .CartOverlay
+    {
+        right: 1rem;
+    }
+}
+@media (max-width: 538px)
+{
+    .CartOverlay
+    {
+        width: 200px;
+    }
+}
